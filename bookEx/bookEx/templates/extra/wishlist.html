@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+            My Wishlist
+{% endblock title %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+        <li>
+            <a href="{{ item.link }}">{{ item.item }}</a>
+        </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1 align="center">My Wishlist</h1>
+<table align="center" border="2" width="400">
+
+    {% for wish in wishlist %}
+
+
+    <tr>
+        <td align="center">
+            <img src="{% if wish.books.picture %}
+                        {% static wish.books.pic_path %}
+                      {% else %}
+                         {% static 'logo.jpg' %}
+                        {% endif %}" width="100" height="100" />
+        </td>
+
+        <td align="center">
+            <a href="book_detail/{{ wish.books.id }}">
+                {{ wish.books.name }}
+            </a>
+        </td>
+
+        <td align="center">
+            {{ wish.username }}
+        </td>
+        <td align="center">
+            ${{ wish.books.price }}
+        </td>
+
+        <td align="center">
+
+
+                        <a href="add_to_cart/{{book.id}}">Add To Cart</a>
+                    </td>
+
+
+        <td>
+            <a href="wishlist_delete/{{ wish.books.id }}">delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+    {% for submitted in wish %}
+    <tr>
+        <td align="center">
+            <img src="{% if wish.books.picture %}
+                        {% static wish.books.pic_path %}
+                      {% else %}
+                         {% static 'logo.jpg' %}
+                        {% endif %}" width="100" height="100" />
+        </td>
+
+        <td align="center">
+            <a href="book_detail/{{ wish.books.id }}">
+                {{ submitted.name }}
+            </a>
+        </td>
+
+        <td align="center">
+            {{ submitted.username }}
+        </td>
+        <td align="center">
+            ${{ submitted.price }}
+        </td>
+
+        <td align="center">
+
+
+                        <a href="add_to_cart/{{submitted.id}}">Add To Cart</a>
+                    </td>
+
+
+        <td>
+            <a href="wishlist_delete/{{ submitted.id }}">delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endblock content%}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+   My Books
+{% endblock title %}
+
+
+{% block sidenav %}
+  {% for item in item_list %}
+     <li>
+         <a href="{{ item.link }}"> {{ item.item }} </a>
+     </li>
+  {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1 align="center"> My Books </h1>
+<table class="table" ><tr>
+    {% for book in books %}
+    <td>
+    <div id="books">
+        <div id="book_container">
+            <div id="image" align="center">
+
+                <img src="{% if book.picture %}
+                              {% static book.pic_path %}
+                         {% else %}
+                              {% static 'logo.jpg' %}
+                          {% endif %}" width="150" height="200"/>
+            </div>
+            <div id="bookinfo" align="center">
+               <a href="book_detail/{{ book.id }}">
+                   {{ book.name }}
+               </a><br/>
+            <a href="book_delete/{{ book_id }}" class="btn btn-danger">Delete</a>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    </td>
+    {% endfor %}</tr>
+</table>
+{% endblock content %}

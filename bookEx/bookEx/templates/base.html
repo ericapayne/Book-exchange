@@ -1,0 +1,62 @@
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            My title
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'main.css' %}"  type="text/css">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" type="text/css"/>
+</head>
+<body>
+<div id="wrapper">
+    <header id="header">
+        <div id="logo">
+
+            <span style="float: right;">
+
+                {% if user.is_authenticated %}
+
+                <img src="{% static 'person.png' %}" width="30" height="30"/>
+                {{ user.username }}
+                    <a href="{% url 'logout'%}?next=/">Logout</a>
+                {% else %}
+                    Not Logged in
+                    <a href="{% url 'login' %}?next=/">Login</a>
+                {% endif %}
+            </span>
+        </div>
+        <div id="top_banner">
+
+            <div id="imgtext">Book Exchange</div>
+
+        </div>
+        <div id="cart" align="right">
+ <a href="{% url 'cart' %}"><img src="{% static 'cart.png' %}" width="40" height="40"></a>
+        </div>
+    </header>
+    <div id="topbar">
+        <nav id="nav">
+            <ul>
+                {% block sidenav %}
+                    <li>Menu1</li>
+                    <li>Menu2</li>
+                {% endblock sidenav %}
+            </ul>
+        </nav>
+    </div>
+    <section id="main">
+        {% block content %}
+            <h1>This is our BookExchange</h1>
+        {% endblock content %}
+    </section>
+    <footer id="footer">
+        2021 Spring Django Base Web System
+    </footer>
+</div>
+</body>
+</html>

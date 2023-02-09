@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+            Display
+{% endblock title %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+        <li>
+            <a href="{{ item.link }}">{{ item.item }}</a>
+        </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1>Books Available</h1>
+<table class="table">
+
+<tr align="center">
+    {% for book in books %}
+
+        <td>
+            <div id="books" align="center">
+                <div id="image" align="center">
+                    <img src="{% if book.picture %}
+                                    {% static book.pic_path %}
+                               {% else %}
+                                    {% static 'logo.jpg' %}
+                                {% endif %}" width="130" height="205" />
+                </div>
+                <div id="bookinfo" align="center">
+                <a href="book_detail/{{ book.id }}">
+                {{ book.name }}
+            </a><br/>
+
+
+
+                Posted By: {{ book.username }}<br/>
+
+                <b>${{ book.price }}</b><br/><a href="add_to_cart/{{book.id}}" class="btn btn-primary">Add To Cart</a>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+</td>
+
+    {% endfor %}
+</tr>
+</table>
+{% endblock content%}

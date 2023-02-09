@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Messages
+{% endblock title %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+        <li>
+            <a href = "{{ item.link }}"> {{ item.item }} </a>
+        </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1 align ="center">Messages</h1>
+{% if admin %}
+<table class="table">
+    {% for message in messages %}
+        <tr>
+            <td>
+               <b> Name:</b> {{ message.name }}
+            </td>
+            <td>
+                <b>Email: </b>{{ message.email }}
+            </td>
+            <td>
+                <b>Message:</b> {{ message.message }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p> Unauthorized User </p>
+{% endif %}
+{% endblock content %}

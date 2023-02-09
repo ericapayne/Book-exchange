@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+   Book Detail
+{% endblock title %}
+
+
+{% block sidenav %}
+  {% for item in item_list %}
+     <li>
+         <a href="{{ item.link }}"> {{ item.item }} </a>
+     </li>
+  {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1> Book Detail Page</h1>
+<div class="row mb-2">
+    <div class="col-md-6">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col-auto d-none d-lg-block">
+            <img src="{% if book.picture %}
+                              {% static book.pic_path %}
+                         {% else %}
+                              {% static 'logo.jpg' %}
+                          {% endif %}" width="200" height="261" align="center"/>
+        </div>
+        <div class="col p-4 d-flex flex-column position-static">
+
+                 <h3>Title: {{ book.name }}</h3>
+<br/>
+        Webpage: <a href = "{{ book.web }}"> {{ book.web }} </a>
+        <br/>
+                Posted by: {{ book.username }}
+<br/>
+                  Price: ${{ book.price }}
+        </div>
+
+    </div>
+</div>
+</div>
+<table align="center" border="2" width="400">
+    {% for review in reviews %}
+    <tr>
+        <td>
+            Name: {{ review.name }}
+        </td>
+        <td>
+            Review: {{ review.review }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<form action="" enctype="multipart/form-data" method="post" novalidate>
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Submit">
+            </td>
+        </tr>
+        {% csrf_token %}
+    </table>
+</form>
+{% endblock content %}

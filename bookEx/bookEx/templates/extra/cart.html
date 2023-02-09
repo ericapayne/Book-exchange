@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+            My Cart
+{% endblock title %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+        <li>
+            <a href="{{ item.link }}">{{ item.item }}</a>
+        </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1 align="center">My Cart</h1>
+<table align="center" border="2" width="400">
+
+    {% for cart in cartlist %}
+
+
+    <tr>
+
+        <td align="center">
+            <img src="{% if book.picture %}
+                        {% static book.pic_path %}
+                      {% else %}
+                         {% static 'logo.jpg' %}
+                        {% endif %}" width="150" height="200" />
+        </td>
+
+
+        <td align="center">
+            <a href="book_detail/{{ cart.books.id }}">
+                {{ cart.books.name }}
+            </a>
+        </td>
+
+
+        <td align="center">
+            ${{ cart.books.price }}
+        </td>
+
+
+
+
+        <td>
+            <a href="cart_delete/{{ cart.books.id }}">delete</a>
+        </td>
+    </tr>
+
+    {% endfor %}
+<tr><td>Cart Total:
+    ${{ cart.total }} </td>
+
+</tr>
+
+
+
+</table>
+
+{% endblock content%}
