@@ -8,5 +8,6 @@ users have to be logged in to use the site made possible through authentication
 <div>
 Includes pages for a wishlist, searching books, posting books to exchange, displaying avaiable books and a cart system for checking out.
 </div>
-
-<img src="" width="25%" height="25%" />
+<div>
+<img src="https://github.com/erizilla/Book-exchange/blob/main/home.JPG" width="50%" height="50%" />
+</div>
